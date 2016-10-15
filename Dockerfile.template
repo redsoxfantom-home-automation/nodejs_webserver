@@ -1,0 +1,7 @@
+FROM ${dockerImage}
+RUN apt-get update && apt-get install -y nodejs npm
+ADD . /nodejs_webserver
+RUN cd python_lifx_server
+EXPOSE ${applicationPort}
+ENV ZK_HOST ${zookeeperHost}
+ENV ZK_PORT ${zookeeperPort}
