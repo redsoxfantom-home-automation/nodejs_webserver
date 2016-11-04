@@ -31,3 +31,5 @@ var app = express()
 	.use(express.static(__dirname + '/public'))
 	.use('/lights',lightsRouter)
 	.listen(config.port);
+
+console.log("Listening on port",config.port);
