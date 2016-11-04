@@ -1,2 +1,10 @@
 node_modules/
 .gradle/
+
+# ignore vim files
+*.swp
+*.swo
+
+# ignore build outputs
+build/
+
