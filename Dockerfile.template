@@ -1,0 +1,5 @@
+FROM ${dockerImage}
+ADD . /nodejs_webserver
+EXPOSE ${applicationPort}
+ENV ZK_HOST ${zookeeperHost}
+ENV ZK_PORT ${zookeeperPort}
