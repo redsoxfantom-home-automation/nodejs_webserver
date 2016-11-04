@@ -1,5 +1,8 @@
 FROM ${dockerImage}
+RUN apt-get update && apt-get install -y nodejs-legacy npm
 ADD . /nodejs_webserver
+RUN cd nodejs_webserver && npm install
 EXPOSE ${applicationPort}
 ENV ZK_HOST ${zookeeperHost}
 ENV ZK_PORT ${zookeeperPort}
+CMD ["node", "nodejs_webserver/index.js"]
