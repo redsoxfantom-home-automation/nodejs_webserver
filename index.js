@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var serviceAccessor = require('nodejs-utils').serviceAccessor;
+var config = require('./config.json');
 
 var lightsRouter = express.Router();
 lightsRouter.use(bodyParser.json());
@@ -29,4 +30,4 @@ serviceAccessor.getService("1.0","lights",function(err,data) {
 var app = express()
 	.use(express.static(__dirname + '/public'))
 	.use('/lights',lightsRouter)
-	.listen(3000);
+	.listen(config.port);
