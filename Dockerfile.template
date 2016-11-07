@@ -1,6 +1,7 @@
 FROM ${dockerImage}
+RUN apt-get update && apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
-RUN apt-get update && apt-get install -y nodejs npm
+RUN apt-get install -y nodejs
 ADD . /nodejs_webserver
 RUN cd nodejs_webserver && npm install
 EXPOSE ${applicationPort}
