@@ -1,7 +1,7 @@
 FROM ${dockerImage}
 RUN apt-get update && apt-get install -y nodejs npm
 ADD . /nodejs_webserver
-RUN npm -v
+RUN npm install npm -g
 RUN cd nodejs_webserver && npm install
 EXPOSE ${applicationPort}
 ENV ZK_HOST ${zookeeperHost}
