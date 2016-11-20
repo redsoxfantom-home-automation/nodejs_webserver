@@ -24,7 +24,6 @@ build {
 
 // Runs an application that does not use Docker
 runNativeApplication << {
-
 	Properties props = loadProperties()
 	String home = getProjectDirectory()
 	
