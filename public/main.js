@@ -12,6 +12,7 @@ lightsApp.controller('MainController', ['$scope', 'lightsWebService', function($
 	};
 
    vm.toggleLightPower = function(lightId, currentLightPower) {
+      console.log("Received request to toggle light")
       lightsWebService.setLight(lightId, !currentLightPower).then(function(response) {
          vm.refreshLights();
       });

@@ -16,10 +16,12 @@ serviceAccessor.getService("1.0","lights",function(err,data) {
 		});
 	})
    .post(function(req,res,next) {
+      textToPost = JSON.stringify(req.body)
+      console.log("Sending POST for ",textToPost)
       request({
          url: 'http://'+data.host+':'+data.port+'/1.0/lights/'+req.body.id,
          method: "POST",
-         body: JSON.stringify(req.body),
+         body: textToPost
       },
       function(err,resp,body) {
          console.log(req.body)
