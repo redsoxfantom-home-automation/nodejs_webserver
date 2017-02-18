@@ -3,13 +3,25 @@
       <title>Lights</title>
    </head>
    <body>
-      <button onclick="httpFunc('/lights','GET',function(resp){populateLights(resp)},null)">Refresh</button>
+      <button onclick="requestLights()">Refresh</button>
 
       <ul id="lightList"/>
 
       <script>
          var lightMap = {}
          
+         function requestLights()
+         {
+            httpFunc(
+               '/lights',
+               'GET',
+               function(resp) {
+                  populateLights(resp)
+               },
+               null
+            );
+         }
+
          function populateLights(lightsJson)
          {
             obj = JSON.parse(lightsJson);
@@ -22,7 +34,8 @@
                lightMap[light.id] = light;
                li = document.createElement('li');
                powerString = light.power? 'ON' : 'OFF'
-               li.innerHTML = 'NAME: "' + light.label + '" POWER: ' + powerString;
+               togglePower = '<button onclick="httpFunc(\'/lights\',\'POST\',requestLights,null">Toggle Light</button>'
+               li.innerHTML = 'NAME: "' + light.label + '" POWER: ' + powerString + "  " + togglePower;
                lightList.appendChild(li);
             }
          }
