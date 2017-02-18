@@ -1,0 +1,44 @@
+<html lang="en">
+   <head>
+      <title>Lights</title>
+   </head>
+   <body>
+      <button onclick="httpFunc('/lights','GET',function(resp){populateLights(resp)},null)">Refresh</button>
+
+      <ul id="lightList"/>
+
+      <script>
+         var lightMap = {}
+         
+         function populateLights(lightsJson)
+         {
+            obj = JSON.parse(lightsJson);
+            lightList = document.getElementById('lightList');
+            lightList.innerHTML = '';
+   
+            for(i = 0; i < obj.length; i++)
+            {
+               light = obj[i];
+               lightMap[light.id] = light;
+               li = document.createElement('li');
+               powerString = light.power? 'ON' : 'OFF'
+               li.innerHTML = 'NAME: "' + light.label + '" POWER: ' + powerString;
+               lightList.appendChild(li);
+            }
+         }
+
+         function httpFunc(url,reqType,callback,data)
+         {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+               if(xmlHttp.readyState === 4 && xmlHttp.status === 200)
+               {
+                  callback(xmlHttp.responseText);
+               }
+            }
+            xmlHttp.open(reqType,url,true);
+            xmlHttp.send(data);
+         }
+      </script>
+   </body>
+</html>
