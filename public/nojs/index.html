@@ -10,6 +10,24 @@
       <script>
          var lightMap = {}
          
+         function toggleLight(lightId)
+         {
+            lightData = {
+               id : lightId,
+               power : !lightMap[lightId].power
+            }
+            lightDataString = JSON.stringify(lightData)
+
+            httpFunc(
+               '/lights',
+               'POST',
+               function(resp) {
+                  requestLights()
+               },
+               lightDataString
+            );
+         }
+
          function requestLights()
          {
             httpFunc(
@@ -34,7 +52,7 @@
                lightMap[light.id] = light;
                li = document.createElement('li');
                powerString = light.power? 'ON' : 'OFF'
-               togglePower = '<button onclick="httpFunc(\'/lights\',\'POST\',requestLights,null">Toggle Light</button>'
+               togglePower = '<button onclick="toggleLight('+light.id+')">Toggle Light</button>'
                li.innerHTML = 'NAME: "' + light.label + '" POWER: ' + powerString + "  " + togglePower;
                lightList.appendChild(li);
             }
@@ -42,6 +60,8 @@
 
          function httpFunc(url,reqType,callback,data)
          {
+            console.log("Sending "+reqType+" to url "+url+" with data "+data)
+
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {
                if(xmlHttp.readyState === 4 && xmlHttp.status === 200)

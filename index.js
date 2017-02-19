@@ -24,12 +24,13 @@ serviceAccessor.getService("1.0","lights",function(err,data) {
          body: textToPost
       },
       function(err,resp,body) {
-         console.log(req.body)
+         console.log("Received Response: %j",resp)
       });
    });
 });
 
 var app = express()
+   .use(bodyParser.json())
 	.use(express.static(__dirname + '/public'))
 	.use('/lights',lightsRouter)
 	.listen(config.port);
