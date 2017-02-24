@@ -5,7 +5,6 @@ var serviceAccessor = require('nodejs-utils').serviceAccessor;
 var config = require('./config.json');
 
 var lightsRouter = express.Router();
-lightsRouter.use(bodyParser.json());
 
 serviceAccessor.getService("1.0","lights",function(err,data) {
 	
@@ -19,6 +18,7 @@ serviceAccessor.getService("1.0","lights",function(err,data) {
       textToPost = JSON.stringify(req.body)
       console.log("Sending POST for ",textToPost)
       request({
+         'Content-type': 'application/json',
          url: 'http://'+data.host+':'+data.port+'/1.0/lights/'+req.body.id,
          method: "POST",
          body: textToPost
@@ -26,6 +26,7 @@ serviceAccessor.getService("1.0","lights",function(err,data) {
       function(err,resp,body) {
          console.log("Received Response: %j",resp)
       });
+      next()
    });
 });
 

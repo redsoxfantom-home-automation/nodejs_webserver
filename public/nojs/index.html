@@ -16,7 +16,6 @@
                id : lightId,
                power : !lightMap[lightId].power
             }
-            lightDataString = JSON.stringify(lightData)
 
             httpFunc(
                '/lights',
@@ -24,7 +23,7 @@
                function(resp) {
                   requestLights()
                },
-               lightDataString
+               lightData
             );
          }
 
@@ -60,6 +59,7 @@
 
          function httpFunc(url,reqType,callback,data)
          {
+            data = JSON.stringify(data)
             console.log("Sending "+reqType+" to url "+url+" with data "+data)
 
             var xmlHttp = new XMLHttpRequest();
@@ -70,6 +70,7 @@
                }
             }
             xmlHttp.open(reqType,url,true);
+            xmlHttp.setRequestHeader("Content-type","application/json")
             xmlHttp.send(data);
          }
       </script>
