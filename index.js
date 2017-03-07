@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var serviceAccessor = require('nodejs-utils').serviceAccessor;
 var config = require('./config.json');
+var log = require('winston')
 
 var lightsRouter = express.Router();
 
@@ -16,7 +17,7 @@ serviceAccessor.getService("1.0","lights",function(err,data) {
 	})
    .post(function(req,res,next) {
       textToPost = JSON.stringify(req.body)
-      console.log("Sending POST for ",textToPost)
+      log.info("Sending POST for ",textToPost)
       request({
          'Content-type': 'application/json',
          url: 'http://'+data.host+':'+data.port+'/1.0/lights/'+req.body.id,
@@ -24,7 +25,7 @@ serviceAccessor.getService("1.0","lights",function(err,data) {
          body: textToPost
       },
       function(err,resp,body) {
-         console.log("Received Response: %j",resp)
+         log.info("Received Response: %j",resp)
       });
       next()
    });
@@ -36,4 +37,4 @@ var app = express()
 	.use('/lights',lightsRouter)
 	.listen(config.port);
 
-console.log("Listening on port",config.port);
+log.info("Listening on port",config.port);
