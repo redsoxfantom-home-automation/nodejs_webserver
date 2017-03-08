@@ -7,7 +7,7 @@ var logger = new (winston.Logger)({
    transports: [
       new (winston.transports.Console)({
          formatter: function(options) {
-            return options.level + ' ['+ module +'] : ' + options.message
+            return options.level.toUpperCase() + ' ['+ module +'] : ' + options.message
          }
       })
    ]
