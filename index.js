@@ -3,9 +3,11 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var serviceAccessor = require('nodejs-utils').serviceAccessor;
 var config = require('./config.json');
-var log = require('winston')
+var log = require('./logger')("index.js")
 
 var lightsRouter = express.Router();
+
+
 
 serviceAccessor.getService("1.0","lights",function(err,data) {
 	
