@@ -4,10 +4,7 @@ var request = require('request');
 var serviceAccessor = require('nodejs-utils').serviceAccessor;
 var config = require('./config.json');
 var log = require('./logger')("index.js")
-
 var lightsRouter = express.Router();
-
-
 
 serviceAccessor.getService("1.0","lights",function(err,data) {
 	var ws = require("socket.io-client")("http://"+data.host+":"+data.port)
@@ -21,9 +18,6 @@ serviceAccessor.getService("1.0","lights",function(err,data) {
 
 	lightsRouter.route('/')
 	.get(function(req,res,next) {
-		//request('http://'+data.host+':'+data.port+'/1.0/lights', function(err, resp, body) {
-			//res.send(JSON.parse(body));
-		//});
       res.send(light_array)
 	})
    .post(function(req,res,next) {
