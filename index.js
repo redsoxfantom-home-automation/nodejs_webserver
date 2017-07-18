@@ -10,12 +10,21 @@ var lightsRouter = express.Router();
 
 
 serviceAccessor.getService("1.0","lights",function(err,data) {
-	
+	var ws = require("socket.io-client")("http://"+data.host+":"+data.port)
+   var light_array = []
+   ws.on('connect',function() {
+      log.info("Successfully connected to light server websocket")
+      ws.on('light_update', function(data) {
+         light_array=data
+      })
+   })
+
 	lightsRouter.route('/')
 	.get(function(req,res,next) {
-		request('http://'+data.host+':'+data.port+'/1.0/lights', function(err, resp, body) {
-			res.send(JSON.parse(body));
-		});
+		//request('http://'+data.host+':'+data.port+'/1.0/lights', function(err, resp, body) {
+			//res.send(JSON.parse(body));
+		//});
+      res.send(light_array)
 	})
    .post(function(req,res,next) {
       textToPost = JSON.stringify(req.body)
