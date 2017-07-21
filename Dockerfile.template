@@ -3,6 +3,6 @@ RUN apt-get update && apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN apt-get install -y nodejs
 ADD . /nodejs_webserver
-RUN cd nodejs_webserver && npm install
+RUN cd nodejs_webserver && npm install && npm run build
 EXPOSE ${applicationPort}
-CMD ["nodejs", "nodejs_webserver/index.js"]
+CMD ["npm", "run"]

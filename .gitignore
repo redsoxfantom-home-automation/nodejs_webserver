@@ -7,3 +7,6 @@ node_modules/
 
 # ignore build outputs
 build/
+
+#ignore npm errors
+npm-debug.log
