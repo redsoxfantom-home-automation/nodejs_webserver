@@ -18,7 +18,7 @@
     "react-dom": "^15.6.1",
     "serve-favicon": "~2.4.2",
     "socket.io": "^2.0.3",
-    "nodejs-utils": "../automation-utilities/nodejs-utils"
+    "nodejs-utils": "../../automation-utilities/nodejs-utils"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

@@ -6,20 +6,28 @@
 apply from: "..${File.separator}automation-utilities${File.separator}build${File.separator}build.support.gradle"
 
 // Define dependencies to copy over in the copyDependencies task
-ext.dependencies = ["automation-utilities"]
+ext.dependencies = []
 
 // Define executables that must be present on the system to do a native deploy and run
 ext.requiredNativeExecutables = ["node","npm", "daemonize"]
 
+task npmInstall << {
+	exec {
+		executable "npm"
+		workingDir "${buildDir}"
+		args=["install"]
+	}
+}
+
 // Overwrite the build task in build.support
 build {
-   dependsOn copyDependencies
    dependsOn copySources
    dependsOn parseTemplates
+   dependsOn npmInstall
 
    // Create a dependency tree of copySources->copyDependencies->parseTemplates
-   copyDependencies.mustRunAfter copySources
-   parseTemplates.mustRunAfter copyDependencies
+   npmInstall.mustRunAfter copySources
+   parseTemplates.mustRunAfter npmInstall
 }
 
 // Runs an application that does not use Docker
@@ -41,12 +49,6 @@ runNativeApplication << {
 
 // Creates an application that does not use Docker
 deployNativeApplication << {
-	exec {
-		executable "npm"
-		workingDir "${buildDir}"
-		args=["install"]
-	}
-
 	exec {
 		executable "npm"
 		workingDir "${buildDir}"
