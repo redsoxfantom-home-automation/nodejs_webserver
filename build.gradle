@@ -35,7 +35,7 @@ runNativeApplication << {
 			  "-e", "${home}${File.separator}err",
 			  "-o", "${home}${File.separator}out",
 			  "-p", "${home}${File.separator}pid",
-			  "/usr/bin/node", "${buildDir}${File.separator}index.js"]
+			  "/usr/bin/node", "${buildDir}${File.separator}bin${File.separator}www"]
 	}
 }
 
@@ -45,5 +45,11 @@ deployNativeApplication << {
 		executable "npm"
 		workingDir "${buildDir}"
 		args=["install"]
+	}
+
+	exec {
+		executable "npm"
+		workingDir "${buildDir}"
+		args=["build"]
 	}
 }

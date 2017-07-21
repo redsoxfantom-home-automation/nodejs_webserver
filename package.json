@@ -1,19 +1,30 @@
 {
-  "name": "nodejs_webserver",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "nodejs-webserver",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www",
+    "build": "node_modules/.bin/browserify libs/server.jsx -t babelify > public/javascripts/server.js"
+  
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "nodejs-utils": "./automation-utilities/nodejs-utils",
-    "request": "^2.74.0",
-    "socket.io-client": "^2.0.3",
-    "winston": "^2.3.1"
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "serve-favicon": "~2.4.2",
+    "socket.io": "^2.0.3",
+    "nodejs-utils": "../automation-utilities/nodejs-utils"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0"
   }
 }
