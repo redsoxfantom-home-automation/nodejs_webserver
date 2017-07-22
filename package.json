@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "node_modules/.bin/browserify libs/server.jsx -t babelify > public/javascripts/server.js"
-  
+    "build": "node_modules/.bin/browserify libs/frontend.jsx -t babelify > public/javascripts/frontend.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",

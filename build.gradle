@@ -52,6 +52,6 @@ deployNativeApplication << {
 	exec {
 		executable "npm"
 		workingDir "${buildDir}"
-		args=["build"]
+		args=["run","build"]
 	}
 }

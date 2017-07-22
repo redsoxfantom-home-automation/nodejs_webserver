@@ -14,7 +14,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(function(req,res,next){
-	logger.debug("Got request " + req);
+	logger.info("Got request for " + req.path + " from " + req.ip);
 	next();
 });
 app.use(bodyParser.json());
