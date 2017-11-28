@@ -1,4 +1,3 @@
 {
-   "port": "${applicationPort}",
-   "logLevel": "${logLevel}"
+   "port": "${applicationPort}"
 }
